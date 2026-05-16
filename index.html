@@ -274,7 +274,167 @@
       }
 
     }
+/* SCENE */
 
+.journey-scene{
+  position:relative;
+  width:100%;
+  height:180px;
+  overflow:hidden;
+  border-radius:24px;
+  margin-top:35px;
+
+  background:linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02),
+    rgba(0,0,0,0.14)
+  );
+}
+
+/* TRACK */
+
+.track{
+  position:absolute;
+  bottom:28px;
+  width:300%;
+  height:4px;
+
+  background:repeating-linear-gradient(
+    to right,
+    rgba(255,255,255,0.7) 0px,
+    rgba(255,255,255,0.7) 45px,
+    transparent 45px,
+    transparent 90px
+  );
+
+  animation:trackMove 5s linear infinite;
+  opacity:0.5;
+}
+
+/* TRAIN */
+
+.train-wrapper{
+  position:absolute;
+  bottom:38px;
+
+  display:flex;
+  width:max-content;
+
+  animation:continuousTrain 18s linear infinite;
+}
+
+.train-set{
+  font-size:3.1rem;
+  white-space:nowrap;
+  margin-right:40px;
+
+  filter:drop-shadow(0 0 12px rgba(255,255,255,0.12));
+}
+
+/* TREES */
+
+.trees{
+  position:absolute;
+  display:flex;
+  width:max-content;
+  white-space:nowrap;
+}
+
+.tree-strip{
+  white-space:nowrap;
+  margin-right:40px;
+}
+
+/* BACK TREES */
+
+.trees-back{
+  bottom:95px;
+  font-size:1.7rem;
+  opacity:0.4;
+
+  animation:treesSlow 25s linear infinite;
+}
+
+/* FRONT TREES */
+
+.trees-front{
+  bottom:70px;
+  font-size:2.2rem;
+
+  animation:treesFast 12s linear infinite;
+}
+
+/* ANIMATIONS */
+
+@keyframes continuousTrain{
+
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(-50%);
+  }
+
+}
+
+@keyframes treesSlow{
+
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(-50%);
+  }
+
+}
+
+@keyframes treesFast{
+
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(-50%);
+  }
+
+}
+
+@keyframes trackMove{
+
+  from{
+    transform:translateX(0);
+  }
+
+  to{
+    transform:translateX(-50%);
+  }
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+  .journey-scene{
+    height:160px;
+  }
+
+  .train-set{
+    font-size:2.3rem;
+  }
+
+  .trees-front{
+    font-size:1.6rem;
+  }
+
+  .trees-back{
+    font-size:1.2rem;
+  }
+
+}
   </style>
 </head>
 <body>
@@ -309,26 +469,71 @@
 
       <h2>The Journey Isn’t New</h2>
 
-      <p class="text">
-        You've done this before.  
-        Early morning alarms. Long rides. Office lights.
-        Video calls from the room after tiring days.
-        <br><br>
+<p class="text">
+  You've done this before.  
+  Packing your bag while Amma keeps asking  
+  if you packed everything properly.  
+  One last homemade meal before leaving home again.
+  <br><br>
 
-        Yet somehow, every trip teaches the same thing —
-        temporary distance never changes where your heart rests.
-        <br><br>
+  Hyderabad will feel familiar — office mornings,
+  busy roads, long workdays, and evenings back in the room
+  missing home a little more than expected.
+  You'll miss Amma’s food, the comfort of your room,
+  small talks with your parents,
+  and the quiet feeling of simply being home.
+  <br><br>
 
-        A few meetings. A few deadlines.
-        Some tea breaks in Hyderabad traffic.
-        Then another train back home again.
-      </p>
+  But this trip is only temporary.  But for sure there are your friends in the city. So the days will pass very quickly.
+  Just a few days of work, tired evenings,
+  and counting down until you're back again —
+  sitting at home, eating your favorite food,
+  and feeling everything become peaceful again.
+</p>
 
-      <!-- Train -->
-      <div class="train">
-        <div class="track"></div>
-        <div class="train-emoji">🚆</div>
-      </div>
+<!-- CONTINUOUS TRAIN SCENE -->
+<div class="journey-scene">
+
+  <!-- BACK TREES -->
+  <div class="trees trees-back">
+    <div class="tree-strip">
+      🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲
+    </div>
+
+    <div class="tree-strip">
+      🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲 🌳 🌲
+    </div>
+  </div>
+
+  <!-- FRONT TREES -->
+  <div class="trees trees-front">
+    <div class="tree-strip">
+      🌴 🌳 🌲 🌴 🌳 🌲 🌴 🌳 🌲 🌴 🌳 🌲 🌴 🌳 🌲
+    </div>
+
+    <div class="tree-strip">
+      🌴 🌳 🌲 🌴 🌳 🌲 🌴 🌳 🌲 🌴 🌳 🌲 🌴 🌳 🌲
+    </div>
+  </div>
+
+  <!-- CONTINUOUS TRAIN -->
+  <div class="train-wrapper">
+
+    <div class="train-set">
+      🚆 🚃 🚃 🚃 🚃 🚃 🚃 🚃 🚃 🚃
+    </div>
+
+    <div class="train-set">
+      🚆 🚃 🚃 🚃 🚃 🚃 🚃 🚃 🚃 🚃
+    </div>
+
+  </div>
+
+  <!-- TRACK -->
+  <div class="track"></div>
+
+</div>
+</div>
 
     </section>
 
