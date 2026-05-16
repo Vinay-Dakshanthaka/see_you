@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>See You Soon, Home 🌙</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+
+    :root{
+      --bg:#0f1724;
+      --glass:rgba(255,255,255,0.08);
+      --text:#f8efe3;
+      --soft:#d7c5b1;
+      --accent:#f7c59f;
+      --line:rgba(255,255,255,0.08);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:
+      linear-gradient(rgba(10,15,30,0.78), rgba(10,15,30,0.88)),
+      url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?q=80&w=1974&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      background-attachment:fixed;
+      color:var(--text);
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    .stars{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      z-index:-1;
+    }
+
+    .star{
+      position:absolute;
+      width:2px;
+      height:2px;
+      background:white;
+      border-radius:50%;
+      animation:twinkle 3s infinite ease-in-out;
+    }
+
+    .container{
+      width:100%;
+      max-width:520px;
+      margin:auto;
+      padding:20px 16px 50px;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding-top:30px;
+    }
+
+    .small{
+      font-size:0.8rem;
+      letter-spacing:3px;
+      color:#c8b7a4;
+      margin-bottom:18px;
+      opacity:0.85;
+    }
+
+    .hero h1{
+      font-family:'Caveat',cursive;
+      font-size:4.5rem;
+      line-height:1;
+      color:#fff7ef;
+      text-shadow:0 0 20px rgba(255,255,255,0.15);
+      animation:float 5s ease-in-out infinite;
+    }
+
+    .hero p{
+      margin-top:24px;
+      font-size:1rem;
+      line-height:1.9;
+      color:var(--soft);
+      padding:0 8px;
+    }
+
+    .glass{
+      background:var(--glass);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:28px;
+      backdrop-filter:blur(14px);
+      padding:24px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.25);
+      margin-bottom:24px;
+    }
+
+    h2{
+      font-family:'Caveat',cursive;
+      font-size:2.4rem;
+      margin-bottom:14px;
+      color:#fff4e8;
+    }
+
+    .text{
+      line-height:2;
+      color:var(--soft);
+      font-size:0.98rem;
+    }
+
+    .train{
+      margin-top:25px;
+      overflow:hidden;
+      position:relative;
+      height:90px;
+    }
+
+    .track{
+      position:absolute;
+      bottom:10px;
+      width:200%;
+      height:3px;
+      background:repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,0.7) 0px,
+      rgba(255,255,255,0.7) 40px,
+      transparent 40px,
+      transparent 80px
+      );
+      animation:track 6s linear infinite;
+      opacity:0.5;
+    }
+
+    .train-emoji{
+      position:absolute;
+      bottom:22px;
+      left:-120px;
+      font-size:3rem;
+      animation:moveTrain 11s linear infinite;
+    }
+
+    .days{
+      display:flex;
+      justify-content:space-between;
+      margin-top:22px;
+      gap:10px;
+    }
+
+    .day-box{
+      flex:1;
+      background:rgba(255,255,255,0.05);
+      border-radius:18px;
+      padding:14px 8px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+
+    .day-box h3{
+      font-size:1.2rem;
+      color:#fff4e6;
+    }
+
+    .day-box span{
+      display:block;
+      margin-top:6px;
+      font-size:0.82rem;
+      color:#c9b7a3;
+    }
+
+    .chart-wrap{
+      margin-top:30px;
+      height:240px;
+    }
+
+    .quote{
+      text-align:center;
+      font-family:'Caveat',cursive;
+      font-size:2rem;
+      color:#fff0df;
+      line-height:1.5;
+    }
+
+    footer{
+      text-align:center;
+      color:#bfae9b;
+      margin-top:35px;
+      font-size:0.9rem;
+      line-height:1.8;
+      padding-bottom:30px;
+    }
+
+    @keyframes moveTrain{
+      from{
+        transform:translateX(0);
+      }
+      to{
+        transform:translateX(calc(100vw + 250px));
+      }
+    }
+
+    @keyframes track{
+      from{
+        transform:translateX(0);
+      }
+      to{
+        transform:translateX(-50%);
+      }
+    }
+
+    @keyframes twinkle{
+      0%,100%{
+        opacity:0.2;
+      }
+      50%{
+        opacity:1;
+      }
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-8px);
+      }
+    }
+
+    @media(min-width:768px){
+
+      .container{
+        max-width:900px;
+      }
+
+      .hero h1{
+        font-size:7rem;
+      }
+
+      .hero p{
+        max-width:700px;
+        font-size:1.1rem;
+      }
+
+      .glass{
+        padding:40px;
+      }
+
+      h2{
+        font-size:3rem;
+      }
+
+      .text{
+        font-size:1.05rem;
+      }
+
+      .chart-wrap{
+        height:320px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="small">HYDERABAD • AGAIN • JUST FOR A FEW DAYS</div>
+
+      <h1 data-aos="fade-up">
+        See You Soon,<br>
+        Home 🌙
+      </h1>
+
+      <p data-aos="fade-up" data-aos-delay="200">
+        The bag feels familiar now.  
+        Same route. Same station. Same goodbye at the door.  
+        But this time too, it’s only for a few days.  
+        Hyderabad will keep you busy,  
+        but home will still wait exactly the same way.
+      </p>
+
+    </section>
+
+    <!-- SECTION -->
+    <section class="glass" data-aos="fade-up">
+
+      <h2>The Journey Isn’t New</h2>
+
+      <p class="text">
+        You've done this before.  
+        Early morning alarms. Long rides. Office lights.
+        Video calls from the room after tiring days.
+        <br><br>
+
+        Yet somehow, every trip teaches the same thing —
+        temporary distance never changes where your heart rests.
+        <br><br>
+
+        A few meetings. A few deadlines.
+        Some tea breaks in Hyderabad traffic.
+        Then another train back home again.
+      </p>
+
+      <!-- Train -->
+      <div class="train">
+        <div class="track"></div>
+        <div class="train-emoji">🚆</div>
+      </div>
+
+    </section>
+
+    <!-- DAYS -->
+    <section class="glass" data-aos="fade-up">
+
+      <h2>Just A Few Days ✨</h2>
+
+      <div class="days">
+
+        <div class="day-box">
+          <h3>Day 1</h3>
+          <span>Travel & settle in</span>
+        </div>
+
+        <div class="day-box">
+          <h3>Day 2</h3>
+          <span>Work gets busy</span>
+        </div>
+
+        <div class="day-box">
+          <h3>Day 3</h3>
+          <span>Already missing home</span>
+        </div>
+
+        <div class="day-box">
+          <h3>Day 4</h3>
+          <span>Return ticket waiting</span>
+        </div>
+
+      </div>
+
+      <!-- Graph -->
+      <div class="chart-wrap">
+        <canvas id="emotionChart"></canvas>
+      </div>
+
+    </section>
+
+    <!-- FINAL -->
+    <section class="glass" data-aos="zoom-in">
+
+      <div class="quote">
+        “Some cities are temporary.  
+        Home never is.”
+      </div>
+
+    </section>
+
+    <footer>
+      Safe travels 🌙<br>
+      Hyderabad is only a chapter.<br>
+      Home is the whole story.
+    </footer>
+
+  </div>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+
+    AOS.init({
+      duration:1000,
+      once:true
+    });
+
+    // Stars
+    const stars = document.getElementById('stars');
+
+    for(let i=0;i<120;i++){
+
+      const s = document.createElement('div');
+      s.classList.add('star');
+
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.top = Math.random()*100 + 'vh';
+      s.style.animationDelay = Math.random()*3 + 's';
+
+      stars.appendChild(s);
+    }
+
+    // Chart
+    const ctx = document.getElementById('emotionChart');
+
+    new Chart(ctx, {
+
+      type:'line',
+
+      data:{
+        labels:[
+          'Leaving Home',
+          'Train Ride',
+          'Hyderabad',
+          'Work Days',
+          'Going Back'
+        ],
+
+        datasets:[{
+          label:'Hope',
+          data:[9,7,6,8,10],
+          borderColor:'#f7c59f',
+          backgroundColor:'rgba(247,197,159,0.2)',
+          fill:true,
+          tension:0.45,
+          pointRadius:5,
+          pointBackgroundColor:'#fff'
+        }]
+      },
+
+      options:{
+        responsive:true,
+        maintainAspectRatio:false,
+
+        plugins:{
+          legend:{
+            labels:{
+              color:'#fff'
+            }
+          }
+        },
+
+        scales:{
+
+          x:{
+            ticks:{
+              color:'#e6d6c3'
+            },
+            grid:{
+              color:'rgba(255,255,255,0.05)'
+            }
+          },
+
+          y:{
+            beginAtZero:true,
+            max:10,
+            ticks:{
+              color:'#e6d6c3'
+            },
+            grid:{
+              color:'rgba(255,255,255,0.05)'
+            }
+          }
+
+        }
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
